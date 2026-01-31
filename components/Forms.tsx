@@ -142,7 +142,7 @@ export const CustomForm: React.FC<FormProps> = ({ type, lang }) => {
           <FormField label={s.message}>
             <textarea name="message" rows={3} className="p-3 border rounded focus:ring-2 focus:ring-sage focus:outline-none"></textarea>
           </FormField>
-          <button type="submit" className="w-full py-4 bg-gold text-white font-medium rounded-lg hover:bg-[#c49f2c] transition-colors shadow-md">
+          <button type="submit" className="w-full py-4 bg-sage text-white font-medium rounded-lg hover:bg-[#5a6a54] transition-colors shadow-md">
             {s.submitRsvp}
           </button>
         </>
@@ -185,7 +185,7 @@ export const CustomForm: React.FC<FormProps> = ({ type, lang }) => {
           <FormField label={s.requests}>
             <textarea name="requests" rows={3} className="p-3 border rounded focus:ring-2 focus:ring-sage focus:outline-none"></textarea>
           </FormField>
-          <button type="submit" className="w-full py-4 bg-sage text-white font-medium rounded-lg hover:bg-[#7a8c72] transition-colors shadow-md">
+          <button type="submit" className="w-full py-4 bg-sage text-white font-medium rounded-lg hover:bg-[#5a6a54] transition-colors shadow-md">
             {s.reserveBtn}
           </button>
         </>
