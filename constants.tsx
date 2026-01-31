@@ -1,7 +1,7 @@
 
 import React from 'react';
-import { Leaf, Heart, MapPin, Calendar, Clock, Music, Utensils, Star, Flower2, Users } from 'lucide-react';
-import { ScheduleItem, FAQItem, Language } from './types';
+import { Flower2 } from 'lucide-react';
+import { ScheduleItem, FAQItem } from './types';
 
 export const COLORS = {
   sage: '#73866C',
@@ -248,36 +248,28 @@ export const BotanicalDivider = () => (
 
 export const Monogram = ({ className = "" }: { className?: string }) => (
   <div className={`relative flex items-center justify-center ${className}`}>
-    <svg viewBox="0 0 400 400" className="w-56 h-56 md:w-72 md:h-72 overflow-visible">
-      {/* Wreath - Meeting at the bottom, sweeping upwards (pointing up) */}
+    <svg viewBox="0 0 400 400" className="w-64 h-64 md:w-80 md:h-80 overflow-visible">
+      {/* Botanical Wreath pointing UPWARDS */}
       <path d="M200 340C140 340 80 280 80 180" fill="none" stroke="#73866C" strokeWidth="1.2" strokeOpacity="0.4" strokeLinecap="round" />
       <path d="M200 340C260 340 320 280 320 180" fill="none" stroke="#73866C" strokeWidth="1.2" strokeOpacity="0.4" strokeLinecap="round" />
       
-      {/* Leaves Cluster Left - oriented upwards */}
       <g fill="#73866C" fillOpacity="0.9">
         <ellipse cx="200" cy="340" rx="9" ry="4" transform="rotate(-15 200 340)" />
         <ellipse cx="150" cy="320" rx="11" ry="5" transform="rotate(-30 150 320)" />
         <ellipse cx="105" cy="275" rx="13" ry="6" transform="rotate(-45 105 275)" />
         <ellipse cx="85" cy="215" rx="11" ry="5.5" transform="rotate(-65 85 215)" />
-        <ellipse cx="80" cy="180" rx="10" ry="5" transform="rotate(-85 80 180)" />
       </g>
-      
-      {/* Leaves Cluster Right - oriented upwards */}
       <g fill="#73866C" fillOpacity="0.9">
         <ellipse cx="250" cy="320" rx="11" ry="5" transform="rotate(30 250 320)" />
         <ellipse cx="295" cy="275" rx="13" ry="6" transform="rotate(45 295 275)" />
         <ellipse cx="315" cy="215" rx="11" ry="5.5" transform="rotate(65 315 215)" />
-        <ellipse cx="320" cy="180" rx="10" ry="5" transform="rotate(85 320 180)" />
       </g>
 
-      {/* Golden botanical buds */}
       <g fill="#B68D40" fillOpacity="0.7">
         <circle cx="130" cy="330" r="3.5" />
         <circle cx="270" cy="330" r="3.5" />
         <circle cx="95" cy="290" r="4.5" />
         <circle cx="305" cy="290" r="4.5" />
-        <circle cx="75" cy="235" r="3.5" />
-        <circle cx="325" cy="235" r="3.5" />
       </g>
 
       {/* "A & J" Monogram Letters */}
@@ -285,10 +277,7 @@ export const Monogram = ({ className = "" }: { className?: string }) => (
       <text x="200" y="225" fontFamily="'Alex Brush', cursive" fontSize="65" fill="#B68D40" fontStyle="italic" textAnchor="middle">&</text>
       <text x="265" y="240" fontFamily="'Cormorant Garamond', serif" fontSize="125" fill="#73866C" fontWeight="300" textAnchor="middle">J</text>
       
-      {/* Elegant Golden Swash Flourish crossing the base */}
       <path d="M100 245C150 270 250 270 300 245" stroke="#B68D40" strokeWidth="1.8" fill="none" strokeOpacity="0.4" strokeLinecap="round" />
-      <circle cx="100" cy="245" r="2.5" fill="#B68D40" fillOpacity="0.5" />
-      <circle cx="300" cy="245" r="2.5" fill="#B68D40" fillOpacity="0.5" />
     </svg>
   </div>
 );

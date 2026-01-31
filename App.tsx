@@ -1,9 +1,8 @@
 
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
-import { Menu, X, MapPin, Calendar, Star, Flower2, Leaf, Users, Quote } from 'lucide-react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { Menu, X, MapPin, Calendar, Users } from 'lucide-react';
 import Section from './components/Section';
-import Accordion from './components/Accordion';
 import { CustomForm } from './components/Forms';
 import Countdown from './components/Countdown';
 import Gallery from './components/Gallery';
@@ -18,97 +17,6 @@ const DressIcon = ({ size = 32, className = "" }: { size?: number, className?: s
     <path d="M7 7C7 7 9.5 8 12 8C14.5 8 17 7 17 7" />
   </svg>
 );
-
-// High-end watercolor-style illustration of bouquet half
-const BouquetHalf = ({ side }: { side: 'left' | 'right' }) => (
-  <svg viewBox="0 0 400 600" fill="none" xmlns="http://www.w3.org/2000/svg" className={`w-full h-full drop-shadow-lg ${side === 'right' ? 'scale-x-[-1]' : ''}`}>
-    {/* Soft base shapes for volume */}
-    <circle cx="280" cy="300" r="100" fill="#73866C" fillOpacity="0.05" />
-    <circle cx="320" cy="380" r="80" fill="#73866C" fillOpacity="0.03" />
-    
-    {/* Stylized Rose bloom outlines */}
-    <path d="M280 220C250 220 230 250 230 280C230 310 250 340 280 340C310 340 330 310 330 280C330 250 310 220 280 220Z" fill="#73866C" fillOpacity="0.08" stroke="#73866C" strokeWidth="0.5" strokeOpacity="0.1" />
-    <path d="M250 260C250 260 270 240 290 260C310 280 290 300 290 300" stroke="#73866C" strokeWidth="1" strokeOpacity="0.2" fill="none" />
-    
-    {/* Flowing Eucalyptus stems and leaves */}
-    <path d="M300 150C250 180 150 250 150 350C150 450 250 550 300 580" stroke="#73866C" strokeWidth="1.2" strokeOpacity="0.15" strokeLinecap="round" />
-    <ellipse cx="120" cy="300" rx="35" ry="20" fill="#73866C" fillOpacity="0.1" transform="rotate(-35 120 300)" />
-    <ellipse cx="160" cy="440" rx="40" ry="25" fill="#73866C" fillOpacity="0.07" transform="rotate(-15 160 440)" />
-    <ellipse cx="200" cy="520" rx="30" ry="15" fill="#73866C" fillOpacity="0.05" transform="rotate(-5 200 520)" />
-    
-    {/* Golden accent branches/berries */}
-    <path d="M220 180C200 120 120 100 80 120" stroke="#B68D40" strokeWidth="0.8" strokeOpacity="0.15" strokeLinecap="round" />
-    <circle cx="80" cy="120" r="7" fill="#B68D40" fillOpacity="0.1" />
-    <circle cx="100" cy="110" r="5" fill="#B68D40" fillOpacity="0.05" />
-    
-    {/* Leaf details */}
-    <path d="M120 300L140 320" stroke="#73866C" strokeWidth="0.5" strokeOpacity="0.2" />
-  </svg>
-);
-
-const BloomingBouquet: React.FC = () => {
-  const { scrollYProgress } = useScroll();
-  
-  // Splits early (0 to 0.25), stays split, re-merges at the very end (0.9 to 1.0)
-  const leftX = useTransform(scrollYProgress, [0, 0.25, 0.9, 1], ['0vw', '-42vw', '-42vw', '0vw']);
-  const rightX = useTransform(scrollYProgress, [0, 0.25, 0.9, 1], ['0vw', '42vw', '42vw', '0vw']);
-  const bouquetY = useTransform(scrollYProgress, [0, 0.25, 0.9, 1], ['0vh', '-30vh', '-30vh', '0vh']);
-  const bouquetScale = useTransform(scrollYProgress, [0, 0.25, 0.9, 1], [1, 0.6, 0.6, 1.5]);
-  const bouquetOpacity = useTransform(scrollYProgress, [0, 0.1, 0.9, 1], [1, 0.4, 0.4, 1]);
-
-  return (
-    <div className="fixed inset-0 pointer-events-none z-0 flex items-center justify-center overflow-hidden">
-      <motion.div style={{ x: leftX, y: bouquetY, scale: bouquetScale, opacity: bouquetOpacity }} className="relative w-[340px] md:w-[700px] h-auto">
-        <BouquetHalf side="left" />
-      </motion.div>
-      <motion.div style={{ x: rightX, y: bouquetY, scale: bouquetScale, opacity: bouquetOpacity }} className="absolute w-[340px] md:w-[700px] h-auto">
-        <BouquetHalf side="right" />
-      </motion.div>
-    </div>
-  );
-};
-
-const PetalDrift: React.FC = () => {
-  const { scrollYProgress } = useScroll();
-  const y1 = useTransform(scrollYProgress, [0, 1], [0, -1000]);
-  const y2 = useTransform(scrollYProgress, [0, 1], [0, -1500]);
-  const rotation = useTransform(scrollYProgress, [0, 1], [0, 360]);
-
-  return (
-    <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden opacity-[0.06]">
-      <motion.div style={{ y: y1, rotate: rotation }} className="absolute top-[20%] left-[5%]"><Leaf size={50} className="text-sage" /></motion.div>
-      <motion.div style={{ y: y2, rotate: rotation }} className="absolute top-[45%] right-[10%]"><Flower2 size={60} className="text-sage" /></motion.div>
-      <motion.div style={{ y: y1, rotate: rotation }} className="absolute top-[75%] left-[20%]"><Leaf size={40} className="text-sage" /></motion.div>
-      <motion.div style={{ y: y2, rotate: rotation }} className="absolute top-[10%] right-[15%] text-sage"><Flower2 size={45} /></motion.div>
-    </div>
-  );
-};
-
-const FloralBorders: React.FC = () => {
-  const { scrollYProgress } = useScroll();
-  const opacity = useTransform(scrollYProgress, [0.05, 0.2], [0, 0.35]);
-
-  return (
-    <motion.div style={{ opacity }} className="fixed inset-0 pointer-events-none z-0 border-[30px] md:border-[50px] border-transparent">
-      {/* Structural Border Frame */}
-      <div className="absolute inset-0 border border-sage/5 rounded-[4rem] m-6"></div>
-      
-      {/* Corner Illustrations */}
-      <div className="absolute top-0 left-0 w-48 h-48 md:w-80 md:h-80 opacity-40 overflow-hidden">
-        <Flower2 size={240} className="text-sage -rotate-12 transform -translate-x-20 -translate-y-20" />
-      </div>
-      <div className="absolute top-0 right-0 w-48 h-48 md:w-80 md:h-80 opacity-40 overflow-hidden">
-        <Leaf size={260} className="text-sage rotate-90 transform translate-x-20 -translate-y-20" />
-      </div>
-      <div className="absolute bottom-0 left-0 w-48 h-48 md:w-80 md:h-80 opacity-40 overflow-hidden">
-        <Leaf size={240} className="text-sage -rotate-90 transform -translate-x-20 translate-y-20" />
-      </div>
-      <div className="absolute bottom-0 right-0 w-48 h-48 md:w-80 md:h-80 opacity-40 overflow-hidden">
-        <Flower2 size={250} className="text-sage rotate-12 transform translate-x-20 translate-y-20" />
-      </div>
-    </motion.div>
-  );
-};
 
 const App: React.FC = () => {
   const [lang, setLang] = useState<Language>('en');
@@ -133,7 +41,6 @@ const App: React.FC = () => {
     { name: t.nav.schedule, href: '#schedule' },
     { name: t.nav.rsvp, href: '#rsvp' },
     { name: t.nav.music, href: '#music' },
-    { name: t.nav.stay, href: '#stay' },
   ];
 
   const scrollTo = (id: string) => {
@@ -144,9 +51,6 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen selection:bg-sage/20 paper-texture relative bg-[#FDFBF7]">
-      <BloomingBouquet />
-      <PetalDrift />
-      <FloralBorders />
       
       {/* Header */}
       <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ${scrolled ? 'bg-white/95 backdrop-blur-md shadow-sm py-5' : 'bg-transparent py-12'}`}>
@@ -183,37 +87,25 @@ const App: React.FC = () => {
           initial={{ opacity: 0, scale: 0.98 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 2, ease: "easeOut" }}
-          className="z-10 flex flex-col items-center max-w-6xl"
+          className="z-10 flex flex-col items-center max-w-6xl mt-20"
         >
-          <Monogram className="mb-24" />
+          <Monogram className="mb-12" />
           
-          <div className="relative mb-16 flex flex-col items-center">
+          <div className="relative mb-12 flex flex-col items-center">
              <h1 className="flex flex-col md:flex-row items-center justify-center">
-                <span className="text-8xl md:text-[12rem] font-script text-sage leading-none drop-shadow-sm italic font-light">Adele</span> 
-                <span className="font-script text-6xl md:text-9xl text-gold mx-8 md:mt-16 select-none italic opacity-60 font-light">&</span> 
-                <span className="text-8xl md:text-[12rem] font-script text-sage leading-none drop-shadow-sm italic font-light">Joel</span>
+                <span className="text-8xl md:text-[10rem] font-serif text-[#73866C] leading-none tracking-tight font-light">Adele</span> 
+                <span className="font-script text-6xl md:text-8xl text-gold mx-8 italic opacity-60 font-light">&</span> 
+                <span className="text-8xl md:text-[10rem] font-serif text-[#73866C] leading-none tracking-tight font-light">Joel</span>
              </h1>
+          </div>
+
+          <div className="flex items-center space-x-8 mb-16 text-3xl font-serif text-[#888] font-light">
+             <span>9</span><span className="text-gold/30">|</span><span>18</span><span className="text-gold/30">|</span><span>2026</span>
           </div>
 
           <p className="text-[11px] md:text-xs uppercase tracking-[0.65em] text-[#444] mb-24 font-black opacity-60 max-w-lg leading-relaxed">
             {t.hero.subheading}
           </p>
-          
-          <div className="mb-16">
-            <div className="text-[11px] uppercase tracking-[0.65em] text-sage font-black mb-8">{t.hero.month.toUpperCase()}</div>
-            <div className="flex items-center justify-center space-x-14 md:space-x-24">
-               <div className="w-28 md:w-40 text-center pb-4 border-b border-sage/20">
-                  <span className="text-[11px] uppercase tracking-widest font-black text-sage/70">{t.hero.day}</span>
-               </div>
-               <div className="text-8xl md:text-[11rem] font-serif text-[#111] leading-none px-8 font-light tracking-tighter">
-                  {t.hero.dateMain}
-               </div>
-               <div className="w-28 md:w-40 text-center pb-4 border-b border-sage/20">
-                  <span className="text-[11px] uppercase tracking-widest font-black text-sage/70">{t.hero.time}</span>
-               </div>
-            </div>
-            <div className="text-[10px] uppercase tracking-[0.6em] text-[#444] font-bold mt-8 opacity-40">{t.hero.year}</div>
-          </div>
 
           <Countdown lang={lang} />
 
@@ -226,14 +118,13 @@ const App: React.FC = () => {
       {/* Announcement */}
       <section id="announcement" className="relative py-56 px-10 md:px-20">
         <div className="max-w-5xl mx-auto text-center relative p-16 md:p-36 border border-sage/5 bg-white/40 backdrop-blur-md shadow-inner rounded-[6rem]">
-          <Leaf className="absolute -top-10 left-1/2 -translate-x-1/2 text-sage opacity-25 w-20 h-20" />
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 1.4 }}>
             <p className="text-4xl md:text-7xl font-serif text-[#222] leading-[1.1] mb-16 italic font-light tracking-tight">
-              {t.announcement.text}
+              Welcome!
             </p>
             <div className="w-24 h-[1px] bg-sage/20 mx-auto mb-12"></div>
-            <p className="text-sm uppercase tracking-[0.45em] text-sage/80 font-black max-w-lg mx-auto leading-relaxed opacity-80">
-              {t.announcement.subtext}
+            <p className="text-xl md:text-2xl font-serif text-[#555] leading-loose max-w-2xl mx-auto italic font-light">
+              {t.announcement.text}
             </p>
           </motion.div>
         </div>
@@ -374,7 +265,7 @@ const App: React.FC = () => {
               </div>
               <div className="md:order-2 flex flex-col items-center">
                  <div className="w-24 h-24 rounded-full border border-sage/10 flex items-center justify-center text-sage group-hover:scale-110 group-hover:border-sage/30 transition-all duration-700 bg-white/50 backdrop-blur-sm shadow-sm">
-                    <Leaf size={28} />
+                    <Calendar size={28} />
                  </div>
                  {i !== t.schedule.items.length - 1 && <div className="w-[1px] h-40 bg-sage/10 my-8"></div>}
               </div>
