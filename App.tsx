@@ -23,7 +23,9 @@ const App: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
   
   const { scrollYProgress } = useScroll();
-  const storyScale = useTransform(scrollYProgress, [0.1, 0.3], [1, 1.05]);
+  const storyScale = useTransform(scrollYProgress, [0.1, 0.4], [1, 1.05]);
+  const storyOpacity = useTransform(scrollYProgress, [0.1, 0.3], [0.8, 1]);
+
   const t = TRANSLATIONS[lang];
 
   useEffect(() => {
@@ -46,7 +48,7 @@ const App: React.FC = () => {
     setIsMenuOpen(false);
     const el = document.querySelector(id);
     if (el) {
-      const offset = 80; // height of fixed header
+      const offset = 80;
       const bodyRect = document.body.getBoundingClientRect().top;
       const elementRect = el.getBoundingClientRect().top;
       const elementPosition = elementRect - bodyRect;
@@ -59,6 +61,22 @@ const App: React.FC = () => {
     }
   };
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.3,
+        delayChildren: 0.5
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 1.2, ease: "easeOut" } }
+  };
+
   return (
     <div className="min-h-screen selection:bg-sage/20 paper-texture relative bg-[#FDFBF7]">
       
@@ -66,7 +84,7 @@ const App: React.FC = () => {
       <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ${scrolled ? 'bg-white/95 backdrop-blur-md shadow-sm py-2' : 'bg-transparent py-4 md:py-8'}`}>
         <nav className="max-w-7xl mx-auto px-6 md:px-10 flex justify-between items-center">
           <button onClick={() => scrollTo('#hero')} className="group flex items-center">
-            {/* Shrunken Monogram Only */}
+            {/* Logo only, shrunken to fit */}
             <div className="w-10 h-10 md:w-12 md:h-12 transition-transform duration-500 group-hover:scale-110">
               <Monogram className="w-full h-full" />
             </div>
@@ -132,34 +150,39 @@ const App: React.FC = () => {
       {/* Hero Section */}
       <section id="hero" className="relative min-h-screen flex flex-col items-center justify-center text-center px-10 pt-24 overflow-hidden">
         <motion.div
-          initial={{ opacity: 0, scale: 0.98 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 2, ease: "easeOut" }}
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
           className="z-10 flex flex-col items-center max-w-6xl mt-20"
         >
-          <div className="w-48 h-48 md:w-64 md:h-64 mb-12">
+          <motion.div variants={itemVariants} className="w-48 h-48 md:w-64 md:h-64 mb-12">
             <Monogram className="w-full h-full" />
-          </div>
+          </motion.div>
           
-          <div className="relative mb-12 flex flex-col items-center">
+          <motion.div variants={itemVariants} className="relative mb-12 flex flex-col items-center">
              <h1 className="flex flex-col md:flex-row items-center justify-center">
                 <span className="text-8xl md:text-[10rem] font-serif text-[#73866C] leading-none tracking-tight font-light">Adele</span> 
                 <span className="font-script text-6xl md:text-8xl text-gold mx-8 italic opacity-60 font-light">&</span> 
                 <span className="text-8xl md:text-[10rem] font-serif text-[#73866C] leading-none tracking-tight font-light">Joel</span>
              </h1>
-          </div>
+          </motion.div>
 
-          <div className="flex items-center space-x-8 mb-16 text-3xl font-serif text-[#888] font-light">
-             <span>9</span><span className="text-gold/30">|</span><span>18</span><span className="text-gold/30">|</span><span>2026</span>
-          </div>
+          <motion.div variants={itemVariants} className="flex items-center space-x-8 mb-16 text-3xl font-serif text-[#888] font-light">
+             {/* DATE FIXED: 4 | 18 | 2026 */}
+             <span>4</span><span className="text-gold/30">|</span><span>18</span><span className="text-gold/30">|</span><span>2026</span>
+          </motion.div>
 
-          <p className="text-[11px] md:text-xs uppercase tracking-[0.65em] text-[#444] mb-24 font-black opacity-60 max-w-lg leading-relaxed">
+          <motion.p variants={itemVariants} className="text-[11px] md:text-xs uppercase tracking-[0.65em] text-[#444] mb-24 font-black opacity-60 max-w-lg leading-relaxed">
             {t.hero.subheading}
-          </p>
+          </motion.p>
 
-          <button onClick={() => scrollTo('#rsvp')} className="mt-8 px-20 py-7 bg-sage text-white uppercase tracking-[0.55em] text-[10px] font-black hover:bg-[#5a6a54] transition-all transform hover:scale-105 shadow-2xl rounded-full">
+          <motion.button 
+            variants={itemVariants}
+            onClick={() => scrollTo('#rsvp')} 
+            className="mt-8 px-20 py-7 bg-sage text-white uppercase tracking-[0.55em] text-[10px] font-black hover:bg-[#5a6a54] transition-all transform hover:scale-105 shadow-2xl rounded-full"
+          >
             {t.hero.rsvpBtn}
-          </button>
+          </motion.button>
         </motion.div>
       </section>
 
@@ -195,7 +218,7 @@ const App: React.FC = () => {
             </div>
           </div>
           <div className="lg:col-span-7 order-1 lg:order-2">
-            <motion.div style={{ scale: storyScale }} className="relative">
+            <motion.div style={{ scale: storyScale, opacity: storyOpacity }} className="relative">
               <div className="aspect-[16/11] bg-white p-7 rounded-[3rem] shadow-2xl border border-sage/5 transform rotate-2">
                 <img src="https://images.unsplash.com/photo-1623091411395-09e79fdbfcf3?q=80&w=1200&auto=format&fit=crop" 
                      alt="Adele and Joel" className="w-full h-full object-cover rounded-[2rem]" />
@@ -328,13 +351,12 @@ const App: React.FC = () => {
         <CustomForm type="rsvp" lang={lang} />
       </Section>
 
-      {/* Music - Specific Spotify Playlist repositioned below RSVP */}
+      {/* Music */}
       <Section id="music" title={t.music.title} dark subtitle={t.music.subtitle}>
         <div className="max-w-4xl mx-auto flex flex-col items-center">
           <p className="text-center text-gray-600 mb-16 italic text-xl leading-relaxed font-light opacity-90">{t.music.text}</p>
           <div className="w-full bg-white p-8 rounded-[4rem] shadow-2xl border border-sage/5">
             <iframe 
-              data-testid="embed-iframe" 
               style={{borderRadius:'32px'}} 
               src="https://open.spotify.com/embed/playlist/1wmRxlpSJ0ZdoSP71G3NOC?utm_source=generator&theme=0" 
               width="100%" 
