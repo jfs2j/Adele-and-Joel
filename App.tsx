@@ -73,8 +73,20 @@ const App: React.FC = () => {
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 1.2, ease: "easeOut" } }
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0, transition: { duration: 1.4, ease: [0.22, 1, 0.36, 1] } }
+  };
+
+  const floatingVariants = {
+    initial: { y: 0 },
+    animate: {
+      y: [0, -10, 0],
+      transition: {
+        duration: 4,
+        repeat: Infinity,
+        ease: "easeInOut"
+      }
+    }
   };
 
   return (
@@ -84,7 +96,7 @@ const App: React.FC = () => {
       <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ${scrolled ? 'bg-white/95 backdrop-blur-md shadow-sm py-2' : 'bg-transparent py-4 md:py-8'}`}>
         <nav className="max-w-7xl mx-auto px-6 md:px-10 flex justify-between items-center">
           <button onClick={() => scrollTo('#hero')} className="group flex items-center">
-            {/* Logo only, shrunken to fit */}
+            {/* Logo only navigation */}
             <div className="w-10 h-10 md:w-12 md:h-12 transition-transform duration-500 group-hover:scale-110">
               <Monogram className="w-full h-full" />
             </div>
@@ -155,8 +167,13 @@ const App: React.FC = () => {
           animate="visible"
           className="z-10 flex flex-col items-center max-w-6xl mt-20"
         >
-          <motion.div variants={itemVariants} className="w-48 h-48 md:w-64 md:h-64 mb-12">
-            <Monogram className="w-full h-full" />
+          <motion.div 
+            variants={itemVariants} 
+            className="w-48 h-48 md:w-64 md:h-64 mb-12"
+          >
+            <motion.div variants={floatingVariants} initial="initial" animate="animate">
+              <Monogram className="w-full h-full" />
+            </motion.div>
           </motion.div>
           
           <motion.div variants={itemVariants} className="relative mb-12 flex flex-col items-center">
@@ -219,7 +236,7 @@ const App: React.FC = () => {
           </div>
           <div className="lg:col-span-7 order-1 lg:order-2">
             <motion.div style={{ scale: storyScale, opacity: storyOpacity }} className="relative">
-              <div className="aspect-[16/11] bg-white p-7 rounded-[3rem] shadow-2xl border border-sage/5 transform rotate-2">
+              <div className="aspect-[16/11] bg-white p-7 rounded-[3rem] shadow-2xl border border-sage/5 transform rotate-2 transition-transform hover:rotate-0 duration-700">
                 <img src="https://images.unsplash.com/photo-1623091411395-09e79fdbfcf3?q=80&w=1200&auto=format&fit=crop" 
                      alt="Adele and Joel" className="w-full h-full object-cover rounded-[2rem]" />
               </div>

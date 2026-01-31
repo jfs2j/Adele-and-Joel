@@ -4,7 +4,7 @@
 An elegant, production-quality React single-page wedding website designed for Joel Sop and Adele Guessom.
 
 ## Features
-- **Responsive Design**: Mobile-first layout using Tailwind CSS.
+- **Responsive Design**: Mobile-first layout using Tailwind CSS..
 - **Interactive Forms**: RSVP and Accommodation forms with client-side validation.
 - **Animations**: Subtle scroll-triggered fade-ins using Framer Motion.
 - **Accessibility**: Semantic HTML and WCAG AA considerations.

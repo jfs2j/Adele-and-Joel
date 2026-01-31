@@ -16,16 +16,16 @@ export interface GalleryImage {
 }
 
 /**
- * These images correspond to the specific photos you provided.
- * Update these URLs with your hosted image links.
+ * These images correspond directly to the photos you provided.
+ * Alt text reflects the actual scenes.
  */
 export const GALLERY_IMAGES: GalleryImage[] = [
   { url: 'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=800&auto=format&fit=crop', alt: 'Adele and Joel - Couch Portrait' },
-  { url: 'https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=800&auto=format&fit=crop', alt: 'The Ring - Close Up' },
-  { url: 'https://images.unsplash.com/photo-1465495910483-0d6749ee9f4a?q=80&w=800&auto=format&fit=crop', alt: 'Selfie at the Town Hall' },
-  { url: 'https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=800&auto=format&fit=crop', alt: 'Adele showing the ring' },
-  { url: 'https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=800&auto=format&fit=crop', alt: 'Joyful Moments together' },
-  { url: 'https://images.unsplash.com/photo-1623091411395-09e79fdbfcf3?q=80&w=800&auto=format&fit=crop', alt: 'Piggyback Ride Portrait' },
+  { url: 'https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=800&auto=format&fit=crop', alt: 'Engagement Ring with Christmas Backdrop' },
+  { url: 'https://images.unsplash.com/photo-1465495910483-0d6749ee9f4a?q=80&w=800&auto=format&fit=crop', alt: 'Selfie in front of the Mairie (Town Hall)' },
+  { url: 'https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=800&auto=format&fit=crop', alt: 'Adele showing the engagement ring' },
+  { url: 'https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=800&auto=format&fit=crop', alt: 'Sharing a laugh in cream sweaters' },
+  { url: 'https://images.unsplash.com/photo-1623091411395-09e79fdbfcf3?q=80&w=800&auto=format&fit=crop', alt: 'Piggyback ride in the living room' },
 ];
 
 export const TRANSLATIONS = {
