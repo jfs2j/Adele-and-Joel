@@ -1,10 +1,9 @@
 
 import React, { useState, useEffect } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import { Menu, X, MapPin, Calendar, Users } from 'lucide-react';
 import Section from './components/Section';
 import { CustomForm } from './components/Forms';
-import Countdown from './components/Countdown';
 import Gallery from './components/Gallery';
 import { TRANSLATIONS, BotanicalDivider, Monogram } from './constants';
 import { Language } from './types';
@@ -46,18 +45,31 @@ const App: React.FC = () => {
   const scrollTo = (id: string) => {
     setIsMenuOpen(false);
     const el = document.querySelector(id);
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
+    if (el) {
+      const offset = 80; // height of fixed header
+      const bodyRect = document.body.getBoundingClientRect().top;
+      const elementRect = el.getBoundingClientRect().top;
+      const elementPosition = elementRect - bodyRect;
+      const offsetPosition = elementPosition - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
   };
 
   return (
     <div className="min-h-screen selection:bg-sage/20 paper-texture relative bg-[#FDFBF7]">
       
       {/* Header */}
-      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ${scrolled ? 'bg-white/95 backdrop-blur-md shadow-sm py-5' : 'bg-transparent py-12'}`}>
-        <nav className="max-w-7xl mx-auto px-10 flex justify-between items-center">
-          <button onClick={() => scrollTo('#hero')} className="group flex flex-col items-start">
-            <span className="text-2xl md:text-3xl font-serif tracking-widest text-sage transition-colors group-hover:text-[#4a5845] uppercase font-light">A & J</span>
-            <div className={`h-[1px] bg-sage/30 transition-all duration-500 ${scrolled ? 'w-0' : 'w-full mt-1'}`}></div>
+      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ${scrolled ? 'bg-white/95 backdrop-blur-md shadow-sm py-2' : 'bg-transparent py-4 md:py-8'}`}>
+        <nav className="max-w-7xl mx-auto px-6 md:px-10 flex justify-between items-center">
+          <button onClick={() => scrollTo('#hero')} className="group flex items-center">
+            {/* Shrunken Logo to fit menu size */}
+            <div className="w-10 h-10 md:w-12 md:h-12 transition-transform duration-500 group-hover:scale-110">
+              <Monogram className="w-full h-full" />
+            </div>
           </button>
           
           <div className="flex items-center">
@@ -70,16 +82,53 @@ const App: React.FC = () => {
                 </li>
               ))}
             </ul>
-            <div className="flex items-center space-x-4 text-[11px] font-black tracking-[0.2em] uppercase ml-10 border-l border-sage/10 pl-10">
+            <div className="flex items-center space-x-4 text-[11px] font-black tracking-[0.2em] uppercase ml-6 md:ml-10 border-l border-sage/10 pl-6 md:pl-10">
               <button onClick={() => setLang('en')} className={`transition-all ${lang === 'en' ? 'text-sage scale-110' : 'text-gray-300'}`}>EN</button>
               <button onClick={() => setLang('fr')} className={`transition-all ${lang === 'fr' ? 'text-sage scale-110' : 'text-gray-300'}`}>FR</button>
             </div>
-            <button className="xl:hidden text-sage ml-8 p-2 rounded-full" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-              {isMenuOpen ? <X size={24}/> : <Menu size={24}/>}
+            <button className="xl:hidden text-sage ml-6 p-2 rounded-full z-50 relative" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+              {isMenuOpen ? <X size={28}/> : <Menu size={28}/>}
             </button>
           </div>
         </nav>
       </header>
+
+      {/* Mobile Menu Overlay */}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div 
+            initial={{ opacity: 0, y: '-100%' }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: '-100%' }}
+            transition={{ type: 'spring', damping: 25, stiffness: 120 }}
+            className="fixed inset-0 bg-[#FDFBF7] z-[45] flex flex-col items-center justify-center p-10 overflow-hidden"
+          >
+            <div className="absolute inset-0 opacity-[0.03] pointer-events-none">
+              <Monogram className="w-full h-full scale-150" />
+            </div>
+            <div className="flex flex-col items-center space-y-8 relative z-10">
+              {/* Shrunken Logo for Consistency */}
+              <div className="w-20 h-20 mb-6">
+                <Monogram className="w-full h-full" />
+              </div>
+              {navLinks.map((link) => (
+                <button 
+                  key={link.name} 
+                  onClick={() => scrollTo(link.href)}
+                  className="text-2xl font-serif text-[#333] tracking-[0.25em] italic hover:text-sage transition-colors"
+                >
+                  {link.name}
+                </button>
+              ))}
+              <div className="pt-10 flex space-x-8 text-[10px] font-black tracking-[0.4em] text-sage/60 uppercase">
+                <button onClick={() => { setLang('en'); setIsMenuOpen(false); }} className={lang === 'en' ? 'text-sage' : ''}>ENGLISH</button>
+                <div className="w-[1px] h-4 bg-sage/20"></div>
+                <button onClick={() => { setLang('fr'); setIsMenuOpen(false); }} className={lang === 'fr' ? 'text-sage' : ''}>FRANÇAIS</button>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Hero Section */}
       <section id="hero" className="relative min-h-screen flex flex-col items-center justify-center text-center px-10 pt-24 overflow-hidden">
@@ -89,7 +138,9 @@ const App: React.FC = () => {
           transition={{ duration: 2, ease: "easeOut" }}
           className="z-10 flex flex-col items-center max-w-6xl mt-20"
         >
-          <Monogram className="mb-12" />
+          <div className="w-48 h-48 md:w-64 md:h-64 mb-12">
+            <Monogram className="w-full h-full" />
+          </div>
           
           <div className="relative mb-12 flex flex-col items-center">
              <h1 className="flex flex-col md:flex-row items-center justify-center">
@@ -107,9 +158,7 @@ const App: React.FC = () => {
             {t.hero.subheading}
           </p>
 
-          <Countdown lang={lang} />
-
-          <button onClick={() => scrollTo('#rsvp')} className="mt-32 px-20 py-7 bg-sage text-white uppercase tracking-[0.55em] text-[10px] font-black hover:bg-[#5a6a54] transition-all transform hover:scale-105 shadow-2xl rounded-full">
+          <button onClick={() => scrollTo('#rsvp')} className="mt-8 px-20 py-7 bg-sage text-white uppercase tracking-[0.55em] text-[10px] font-black hover:bg-[#5a6a54] transition-all transform hover:scale-105 shadow-2xl rounded-full">
             {t.hero.rsvpBtn}
           </button>
         </motion.div>
@@ -303,7 +352,9 @@ const App: React.FC = () => {
       {/* Footer */}
       <footer className="py-64 text-center border-t border-gray-100 bg-[#F9F7F2] relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-10 relative z-10">
-          <Monogram className="mx-auto mb-20 shadow-none border-sage/5" />
+          <div className="w-32 h-32 md:w-48 md:h-48 mx-auto mb-20">
+            <Monogram className="w-full h-full" />
+          </div>
           <p className="text-7xl md:text-9xl font-script italic text-sage mb-16 drop-shadow-sm font-light">Adele & Joel</p>
           <p className="text-[11px] uppercase tracking-[0.8em] text-gray-400 font-black mb-20">APRIL 18, 2026 • ALFORTVILLE</p>
           <div className="w-40 h-[1px] bg-sage/10 mx-auto mb-14"></div>

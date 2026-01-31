@@ -11,7 +11,7 @@ interface CountdownProps {
 
 const RollingNumber = ({ value }: { value: number }) => {
   return (
-    <div className="h-[1.4em] overflow-hidden relative inline-block">
+    <div className="h-[1.2em] overflow-hidden relative inline-block">
       <AnimatePresence mode="popLayout">
         <motion.span
           key={value}
@@ -37,8 +37,8 @@ const Countdown: React.FC<CountdownProps> = ({ lang }) => {
   });
 
   const labels = {
-    en: { days: 'Days', hours: 'Hours', minutes: 'Minutes', seconds: 'Seconds' },
-    fr: { days: 'Jours', hours: 'Heures', minutes: 'Minutes', seconds: 'Secondes' }
+    en: { days: 'Days', hours: 'Hours', minutes: 'Min', seconds: 'Sec' },
+    fr: { days: 'Jours', hours: 'Heures', minutes: 'Min', seconds: 'Sec' }
   };
 
   useEffect(() => {
@@ -62,11 +62,11 @@ const Countdown: React.FC<CountdownProps> = ({ lang }) => {
   }, []);
 
   const TimeUnit = ({ value, label }: { value: number, label: string }) => (
-    <div className="flex flex-col items-center px-4 md:px-8 py-6 min-w-[100px] md:min-w-[160px]">
-      <div className="bg-white/80 backdrop-blur-md rounded-3xl shadow-xl border border-sage/5 w-full flex items-center justify-center py-8 md:py-12 mb-4">
+    <div className="flex flex-col items-center px-2 md:px-8 py-4 md:py-6 w-1/4 md:min-w-[160px]">
+      <div className="bg-white/80 backdrop-blur-md rounded-2xl md:rounded-3xl shadow-xl border border-sage/5 w-full flex items-center justify-center py-4 md:py-12 mb-3 md:mb-4">
         <RollingNumber value={value} />
       </div>
-      <span className="text-[10px] md:text-[11px] uppercase tracking-[0.5em] text-sage/70 font-black">
+      <span className="text-[8px] md:text-[11px] uppercase tracking-[0.3em] md:tracking-[0.5em] text-sage/70 font-black">
         {label}
       </span>
     </div>
@@ -77,7 +77,7 @@ const Countdown: React.FC<CountdownProps> = ({ lang }) => {
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 1, duration: 1.8 }}
-      className="flex flex-wrap items-center justify-center mt-16 md:mt-28 max-w-6xl mx-auto"
+      className="flex items-center justify-center mt-12 md:mt-28 w-full max-w-4xl mx-auto"
     >
       <TimeUnit value={timeLeft.days} label={labels[lang].days} />
       <TimeUnit value={timeLeft.hours} label={labels[lang].hours} />

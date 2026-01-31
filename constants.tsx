@@ -15,13 +15,17 @@ export interface GalleryImage {
   alt: string;
 }
 
+/**
+ * These images correspond to the photos you provided.
+ * You should replace these URLs with your hosted image paths.
+ */
 export const GALLERY_IMAGES: GalleryImage[] = [
-  { url: 'https://images.unsplash.com/photo-1623091411395-09e79fdbfcf3?q=80&w=800&auto=format&fit=crop', alt: 'Wedding Couple' },
-  { url: 'https://images.unsplash.com/photo-1537633552985-df8429e8048b?q=80&w=800&auto=format&fit=crop', alt: 'Wedding Details' },
-  { url: 'https://images.unsplash.com/photo-1522673607200-1648832cee98?q=80&w=800&auto=format&fit=crop', alt: 'Celebration' },
-  { url: 'https://images.unsplash.com/photo-1606216794074-735e91aa2c92?q=80&w=800&auto=format&fit=crop', alt: 'The Kiss' },
-  { url: 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=800&auto=format&fit=crop', alt: 'Dance Floor' },
-  { url: 'https://images.unsplash.com/photo-1583939003579-730e3918a45a?q=80&w=800&auto=format&fit=crop', alt: 'The Couple' },
+  { url: 'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=800&auto=format&fit=crop', alt: 'Adele and Joel - Couch Portrait' }, // Photo 1
+  { url: 'https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=800&auto=format&fit=crop', alt: 'Close up of Engagement Ring' }, // Photo 2
+  { url: 'https://images.unsplash.com/photo-1465495910483-0d6749ee9f4a?q=80&w=800&auto=format&fit=crop', alt: 'Selfie at the Mairie' }, // Photo 3
+  { url: 'https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=800&auto=format&fit=crop', alt: 'Adele showing the ring' }, // Photo 4
+  { url: 'https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=800&auto=format&fit=crop', alt: 'Laughter and Joy' }, // Photo 5
+  { url: 'https://images.unsplash.com/photo-1623091411395-09e79fdbfcf3?q=80&w=800&auto=format&fit=crop', alt: 'Piggyback Ride' }, // Photo 6
 ];
 
 export const TRANSLATIONS = {
@@ -248,7 +252,7 @@ export const BotanicalDivider = () => (
 
 export const Monogram = ({ className = "" }: { className?: string }) => (
   <div className={`relative flex items-center justify-center ${className}`}>
-    <svg viewBox="0 0 400 400" className="w-64 h-64 md:w-80 md:h-80 overflow-visible">
+    <svg viewBox="0 0 400 400" className="w-full h-full overflow-visible">
       {/* Botanical Wreath pointing UPWARDS */}
       <path d="M200 340C140 340 80 280 80 180" fill="none" stroke="#73866C" strokeWidth="1.2" strokeOpacity="0.4" strokeLinecap="round" />
       <path d="M200 340C260 340 320 280 320 180" fill="none" stroke="#73866C" strokeWidth="1.2" strokeOpacity="0.4" strokeLinecap="round" />
