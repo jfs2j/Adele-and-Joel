@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
+import { motion, AnimatePresence, useScroll, useTransform, Variants } from 'framer-motion';
 import { Menu, X, MapPin, Calendar, Users } from 'lucide-react';
 import Section from './components/Section';
 import { CustomForm } from './components/Forms';
@@ -61,7 +61,8 @@ const App: React.FC = () => {
     }
   };
 
-  const containerVariants = {
+  // Fixed variant definitions with explicit typing to resolve compatibility issues with nested transition properties
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -72,12 +73,20 @@ const App: React.FC = () => {
     }
   };
 
-  const itemVariants = {
+  const itemVariants: Variants = {
     hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 1.4, ease: [0.22, 1, 0.36, 1] } }
+    visible: { 
+      opacity: 1, 
+      y: 0, 
+      transition: { 
+        duration: 1.4, 
+        // Cast to any to handle internal framer-motion Easing union type ambiguity in various TS environments
+        ease: [0.22, 1, 0.36, 1] as any 
+      } 
+    }
   };
 
-  const floatingVariants = {
+  const floatingVariants: Variants = {
     initial: { y: 0 },
     animate: {
       y: [0, -10, 0],
@@ -157,7 +166,7 @@ const App: React.FC = () => {
             </div>
           </motion.div>
         )}
-      </AnimatePresence>
+      </AnPresence>
 
       {/* Hero Section */}
       <section id="hero" className="relative min-h-screen flex flex-col items-center justify-center text-center px-10 pt-24 overflow-hidden">
