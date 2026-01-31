@@ -166,7 +166,8 @@ const App: React.FC = () => {
             </div>
           </motion.div>
         )}
-      </AnPresence>
+      {/* Fixed typo in closing tag for AnimatePresence component */}
+      </AnimatePresence>
 
       {/* Hero Section */}
       <section id="hero" className="relative min-h-screen flex flex-col items-center justify-center text-center px-10 pt-24 overflow-hidden">
