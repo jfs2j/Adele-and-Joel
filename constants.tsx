@@ -17,15 +17,15 @@ export interface GalleryImage {
 
 /**
  * These images correspond to the photos you provided.
- * You should replace these URLs with your hosted image paths.
+ * Update these URLs once you have hosted your personal images.
  */
 export const GALLERY_IMAGES: GalleryImage[] = [
-  { url: 'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=800&auto=format&fit=crop', alt: 'Adele and Joel - Couch Portrait' }, // Photo 1
-  { url: 'https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=800&auto=format&fit=crop', alt: 'Close up of Engagement Ring' }, // Photo 2
-  { url: 'https://images.unsplash.com/photo-1465495910483-0d6749ee9f4a?q=80&w=800&auto=format&fit=crop', alt: 'Selfie at the Mairie' }, // Photo 3
-  { url: 'https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=800&auto=format&fit=crop', alt: 'Adele showing the ring' }, // Photo 4
-  { url: 'https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=800&auto=format&fit=crop', alt: 'Laughter and Joy' }, // Photo 5
-  { url: 'https://images.unsplash.com/photo-1623091411395-09e79fdbfcf3?q=80&w=800&auto=format&fit=crop', alt: 'Piggyback Ride' }, // Photo 6
+  { url: 'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=800&auto=format&fit=crop', alt: 'Adele and Joel - Couch Portrait' },
+  { url: 'https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=800&auto=format&fit=crop', alt: 'Engagement Ring Detail' },
+  { url: 'https://images.unsplash.com/photo-1465495910483-0d6749ee9f4a?q=80&w=800&auto=format&fit=crop', alt: 'Selfie at the Town Hall' },
+  { url: 'https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=800&auto=format&fit=crop', alt: 'Showing the Ring' },
+  { url: 'https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=800&auto=format&fit=crop', alt: 'Adele and Joel - Laughter' },
+  { url: 'https://images.unsplash.com/photo-1623091411395-09e79fdbfcf3?q=80&w=800&auto=format&fit=crop', alt: 'Adele and Joel - Piggyback Ride' },
 ];
 
 export const TRANSLATIONS = {

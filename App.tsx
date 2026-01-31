@@ -66,7 +66,7 @@ const App: React.FC = () => {
       <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ${scrolled ? 'bg-white/95 backdrop-blur-md shadow-sm py-2' : 'bg-transparent py-4 md:py-8'}`}>
         <nav className="max-w-7xl mx-auto px-6 md:px-10 flex justify-between items-center">
           <button onClick={() => scrollTo('#hero')} className="group flex items-center">
-            {/* Shrunken Logo to fit menu size */}
+            {/* Shrunken Monogram Only */}
             <div className="w-10 h-10 md:w-12 md:h-12 transition-transform duration-500 group-hover:scale-110">
               <Monogram className="w-full h-full" />
             </div>
@@ -107,7 +107,6 @@ const App: React.FC = () => {
               <Monogram className="w-full h-full scale-150" />
             </div>
             <div className="flex flex-col items-center space-y-8 relative z-10">
-              {/* Shrunken Logo for Consistency */}
               <div className="w-20 h-20 mb-6">
                 <Monogram className="w-full h-full" />
               </div>
@@ -172,7 +171,7 @@ const App: React.FC = () => {
               Welcome!
             </p>
             <div className="w-24 h-[1px] bg-sage/20 mx-auto mb-12"></div>
-            <p className="text-xl md:text-2xl font-serif text-[#555] leading-loose max-w-2xl mx-auto italic font-light">
+            <p className="text-xl md:text-2xl font-serif text-[#555] opacity-90 leading-loose max-w-2xl mx-auto italic font-light">
               {t.announcement.text}
             </p>
           </motion.div>
